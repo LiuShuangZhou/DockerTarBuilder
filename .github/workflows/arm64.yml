@@ -21,6 +21,7 @@ jobs:
         images="${{ github.event.inputs.docker_images }}"
         IFS=',' read -r -a image_array <<< "$images"
         for image in "${image_array[@]}"; do
+          docker login -u cn-south-1@QEK2SYV35J3RVP0UU61E swr.cn-south-1.myhuaweicloud.com
           docker pull "${image}" --platform "linux/arm64"
           docker save "${image}" -o "${image//\//_}-arm64.tar"
         done
